@@ -1,0 +1,8 @@
+{
+    "name": "ProjectEulor",
+    "version": "1.0.0",
+    "keywords": ["util", "functional", "server", "client", "browser"],
+    "author": "ssrcr",
+    "contributors": [],
+    "dependencies": {}
+}

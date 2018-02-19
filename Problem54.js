@@ -94,8 +94,9 @@ royalFlush = (playerOne, playerTwo, hands) => {
     console.log("Player 2 Wins: " , playerTwoWins);
 };
 
-straightFlush = (playerOneHand, playerTwoHand, hands) => {
-//    let values = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'];
+// Check if all cards are consecutive values of same suit.
+straightFlush = (playerOneHand, playerTwoHand) => {
+    
     let spades = ['2S', '3S', '4S', '5S', '6S', '7S', '8S', '9S', 'TS', 'JS', 'QS', 'KS', 'AS'];
     let clubs = ['2C', '3C', '4C', '5C', '6C', '7C', '8C', '9C', 'TC', 'JC', 'QC', 'KC', 'AC'];
     let hearts = ['2H', '3H', '4H', '5H', '6H', '7H', '8H', '9H', 'TH', 'JH', 'QH', 'KH', 'AH'];
@@ -124,7 +125,6 @@ straightFlush = (playerOneHand, playerTwoHand, hands) => {
         for (i in winningHands) {
             if (compareArrays(winningHands[i], playerMatchingValues)) {
                 console.log(winningHands[i], playerMatchingValues);
-//                console.log(true);
                 return true;
             }
         }
@@ -137,7 +137,8 @@ straightFlush = (playerOneHand, playerTwoHand, hands) => {
         for (i in playerMatchingValues) {
             let cardValues = playerMatchingValues[i].split('');
             if (cardValues[1] === 'S') {
-                allHands(clubs, playerMatchingValues.sort());
+                let isMatch = allHands(clubs, playerMatchingValues.sort());
+                return isMatch;
                 break;
             }
 
@@ -148,12 +149,14 @@ straightFlush = (playerOneHand, playerTwoHand, hands) => {
             }
 
             if (cardValues[1] === 'H') {
-                allHands(clubs, playerMatchingValues.sort());
+                let isMatch = allHands(clubs, playerMatchingValues.sort());
+                return isMatch;
                 break;
             }
 
             if (cardValues[1] === 'D') {
-                allHands(clubs, playerMatchingValues.sort());
+                let isMatch = allHands(clubs, playerMatchingValues.sort());
+                return isMatch;
                 break;
             }
             arrayOfValues.push(cardValues);
@@ -189,9 +192,54 @@ straightFlush = (playerOneHand, playerTwoHand, hands) => {
         
         if (playerTwoValue === 5 < playerOneValue < 5) {
             if (isStraightFlush(playerTwoMatchingValues)) playerTwoWins++;
- 
-        };   
+        };
+        
+        if (playerOneValue < 5 && playerTwoValue < 5) return fourOfAKind(playerOneHand, playerTwoHand);
     }
+};
+
+// check if both hands have four cards of the same value
+fourOfAKind = (playerOneHand, playerTwoHand) => {
+    let values = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'];
+
+    let getAllCardValues = (playerHand, values) => {
+        let cardValues = [];
+        // Split values from player one hands
+        for (a in playerHand) {
+            let value = playerHand[a].split('');
+            cardValues.push(value[0]);
+        };
+        // check if the hand has four cards of the same values
+
+        for (b in values) {
+            let cardValue = values[b];
+            let count = 0;
+            for (c in cardValues) {
+                if (cardValues[c] === cardValue){
+                    count++;
+                }
+            }
+            
+            let win = false;
+            if (count === 4) {
+                console.log("Wins by four of a kind!");
+                let win = true;
+            }
+            return win;
+        }
+    };
+
+    if (getAllCardValues(playerOneHand, values) === true && getAllCardValues(playerTwoHand, values) === false) {
+        playerOneHand++;
+    } else if (getAllCardValues(playerTwoHand, values) === true && getAllCardValues(playerOneHand, values) === false) {
+        playerTwoHand++;
+    } else {
+        fullHouse(playerOneHand, playerTwoHand);
+    };
+
+};
+fullHouse = (playerOneHand, playerTwoHand) => {
+    console.log(playerOneHand, playerTwoHand);
 };
 
 console.log(poker(hands));

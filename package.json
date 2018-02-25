@@ -1,8 +1,22 @@
 {
     "name": "ProjectEulor",
     "version": "1.0.0",
-    "keywords": ["util", "functional", "server", "client", "browser"],
+    "keywords": [
+        "util",
+        "functional",
+        "server",
+        "client",
+        "browser"
+    ],
+    "scripts": {
+        "build": "babel --presets env src -d lib"
+    },
     "author": "ssrcr",
     "contributors": [],
-    "dependencies": {}
+    "dependencies": {},
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-preset-env": "^1.6.1",
+        "babel-preset-es2016": "^6.24.1"
+    }
 }

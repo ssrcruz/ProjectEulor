@@ -1,7 +1,7 @@
 import straightFlush from "./straightFlush";
 
-let playerOneWins = 0;
-let playerTwoWins = 0;
+export let playerOneWins = 0;
+export let playerTwoWins = 0;
 let royalFlush = (playerOne, playerTwo, hands) => {
     let playerOneHand = playerOne;
     let playerTwoHand = [];
